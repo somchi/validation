@@ -1,25 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useEffect } from 'react';
 import './App.css';
+import { Button } from './components/Button';
+import { RegistrationForm } from './components/Form';
+import { Modal } from './components/Modal';
+import { useAppDispatch, useAppSelector } from './store/hooks';
+import { resetState, setModalToggle } from './store/reducer/settings.reducer';
+import { persistState } from './utils/helper';
 
 function App() {
+  const state = useAppSelector((state) => state.appSettings);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    let mounted = true;
+
+    if (mounted) {
+      const state = persistState();
+
+      if (Object.keys(state).length === 0) {
+        dispatch(setModalToggle(true));
+      } else {
+        dispatch(resetState(state));
+      }
+    }
+
+    return () => {
+      mounted = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleClick = () => {
+    dispatch(setModalToggle(true));
+  };
+
   return (
-    <div className="App">
+    <main className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Button className="button" onClick={handleClick}>
+          Settings
+        </Button>
       </header>
-    </div>
+      <div className="content">
+        <RegistrationForm />
+      </div>
+      {state.showModal ? <Modal /> : null}
+    </main>
   );
 }
 

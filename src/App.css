@@ -1,38 +1,184 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+  background-color: #364a63;
+}
+
 .App {
+  display: flex;
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  flex-direction: column;
+  height: 100%;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  display: grid;
   color: white;
+  padding: 1rem;
+  background-color: white;
+  box-shadow: 0px 2px 8px rgb(0 0 0 / 0.2);
 }
 
-.App-link {
-  color: #61dafb;
+.content {
+  display: grid;
+  height: 100%;
+  align-items: center;
+  align-content: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.button {
+  display: grid;
+  align-content: center;
+  height: 2rem;
+  width: 15rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 1.2rem 0;
+  text-align: center;
+  background-color: #6576ff;
+  color: white;
+  font-weight: 600;
+}
+label {
+  text-align: start;
+  color: #364a63;
+  margin-bottom: 0.3rem;
+}
+input {
+  padding: 0.7rem;
+  border: 1px solid rgb(185, 184, 184);
+  border-radius: 8px;
+  color: #364a63;
+}
+input:focus {
+  outline: none;
+  border: 1px solid #6576ff;
+}
+input::placeholder {
+  color: #cecfd2;
+}
+
+p {
+  color: #364a63;
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: larger;
+}
+.submit {
+  background-color: #6576ff;
+}
+.submit:disabled {
+  cursor: not-allowed;
+  background-color: #939ffd;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+}
+
+.strength {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  span {
+    font-size: 12px;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+.password-hint {
+  font-size: 12px;
+}
+
+form {
+  display: grid;
+  width: 95%;
+  justify-self: center;
+  background-color: white;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 1rem 2rem;
+
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  .form-control {
+    display: grid;
+    margin-bottom: 1rem;
+  }
+}
+
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.overlay-content {
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 300px;
+}
+
+.modal-header {
+  display: grid;
+  .modal-title {
+    display: grid;
+  }
+  .title {
+    font-size: large;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+  .description {
+    font-size: medium;
+    font-weight: 400;
+  }
+}
+
+.modal-close {
+  display: flex;
+  border: 1.5px solid red;
+  width: 1.7rem;
+  height: 1.7rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  color: red;
+  justify-self: flex-end;
+  cursor: pointer;
+}
+
+.modal-body {
+  display: grid;
+  .group {
+    display: flex;
+    align-content: center;
+    margin: 0.3rem 0;
+  }
+  span {
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .App-header {
+    padding: 1rem 3rem;
+  }
+  form {
+    width: 45%;
+  }
+  .overlay-content {
+    width: 50%;
   }
 }
