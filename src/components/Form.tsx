@@ -93,6 +93,18 @@ export const RegistrationForm = () => {
     return strength;
   };
 
+  const showPasswordHint = () => {
+    const criteria = {
+      special: state.special,
+      characters: state.characters,
+      figure: state.figure,
+      lowercase: state.lowercase,
+      uppercase: state.uppercase,
+    };
+    const values = Object.values(criteria);
+    return values.includes(true);
+  };
+
   return (
     <form className="" onSubmit={handleSubmit}>
       <p>Registration Form</p>
@@ -118,19 +130,23 @@ export const RegistrationForm = () => {
           name="password"
           disabled={disableInput}
         />
-        <span className="password-hint">
-          {`pasword should contain at least ${
-            state.uppercase ? '1 uppercase' : ''
-          }${state.lowercase ? ', 1 lowercase' : ''}${
-            state.figure ? ', 1 figure' : ''
-          }${state.special ? ', 1 special character' : ''}${
-            state.characters ? ', 8 characters' : ''
-          }`}
-        </span>
+        {showPasswordHint() ? (
+          <span className="password-hint">
+            {`pasword should contain at least ${
+              state.uppercase ? '1 uppercase' : ''
+            }${state.lowercase ? ', 1 lowercase' : ''}${
+              state.figure ? ', 1 figure' : ''
+            }${state.special ? ', 1 special character' : ''}${
+              state.characters ? ', 8 characters' : ''
+            }`}
+          </span>
+        ) : null}
         {data.password ? (
           <div className="strength">
             {renderPasswordStrength()}
-            <span>Easy</span>
+            <span>{`${
+              count === 1 ? 'Easy' : count === 2 ? 'Medium' : 'Hard'
+            }`}</span>
           </div>
         ) : null}
       </div>

@@ -42,7 +42,7 @@ export const isPasswordValid = (password: string, condition: Conditions) => {
       criteria.push((pass: string) => /[a-z]/.test(pass));
     } else if (value && key === 'characters') {
       criteria.push((pass: string) => pass.length >= 8);
-    } else if (value && key === 'specail') {
+    } else if (value && key === 'special') {
       criteria.push((pass: string) => /[!@#$%^&*()]/.test(pass));
     }
   });
